@@ -1,0 +1,10 @@
+{
+  "scripts": {
+    "sass": "sass ./styles/index.scss ./index.css -w",
+    "build": "node ./build/index.js",
+    "dev": "nodemon ./build/index.js"
+  },
+  "dependencies": {
+    "sass": "^1.69.5"
+  }
+}

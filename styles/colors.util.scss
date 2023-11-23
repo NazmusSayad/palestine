@@ -1,0 +1,29 @@
+@use 'sass:map';
+@use 'sass:list';
+@use 'sass:color';
+@use 'sass:string';
+
+$color-var-prefix: '--raw-color';
+
+@function parseColorToRGB($clr) {
+  $red: color.red($clr);
+  $green: color.green($clr);
+  $blue: color.blue($clr);
+  @return #{$red, $green, $blue};
+}
+
+@function clr($var, $opacity: 1) {
+  @if ($opacity >= 1) {
+    @return string.unquote('rgb(var(#{$color-var-prefix}-#{$var}))');
+  }
+
+  @return string.unquote(
+    'rgba(var(#{$color-var-prefix}-#{$var}), #{$opacity})'
+  );
+}
+
+@mixin extractColors($map) {
+  @each $key, $value in $map {
+    #{$color-var-prefix}-#{$key}: #{parseColorToRGB($value)};
+  }
+}

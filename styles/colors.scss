@@ -1,0 +1,10 @@
+@import './colors.util.scss';
+
+$colorsMap: (
+  bg: #111,
+  fg: #eee,
+);
+
+html {
+  @include extractColors($colorsMap);
+}
