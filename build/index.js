@@ -6,13 +6,15 @@ const generateCard = require('./generateCard')
 const childProcess = require('child_process')
 
 const templatePath = path.join(__dirname, '../template.html')
-const imagesDir = path.join(__dirname, '../images')
+const imagesDir = path.join(__dirname, '../media/palestine')
 
+const images = fs.readdirSync(imagesDir)
 const template = fs.readFileSync(templatePath, 'utf8')
-const images = fs.readdirSync(imagesDir).map((img) => `/images/${img}`)
 
-const htmlCards = images.map((url) => generateCard({ url })).join('\n')
+const htmlCards = images
+  .map((url) => generateCard({ url: `/media/palestine/${url}` }))
+  .join('\n')
 const html = template.replace('<!--CARDS-->', htmlCards)
-fs.writeFileSync(path.join(__dirname, '../index.html'), html)
 
+fs.writeFileSync(path.join(__dirname, '../index.html'), html)
 childProcess.execSync('npm run sass:build')
