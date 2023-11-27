@@ -1,12 +1,13 @@
-import createCart from './createCard.js'
-import getImages from './getImages.js'
-
 const gallery = document.querySelector('#gallery')
 const cardsContainer = gallery.querySelector('.cards')
+const cards = cardsContainer.querySelectorAll('.card')
 
-;(async () => {
-  const images = await getImages()
-  images.forEach((url) => {
-    cardsContainer.appendChild(createCart(url))
-  })
-})()
+cards.forEach((card) => {
+  card.onclick = () => {
+    const { src } = card.querySelector('img')
+    const a = document.createElement('a')
+    a.download = 'FreePalestine.' + src.split('.').pop()
+    a.href = src
+    a.click()
+  }
+})

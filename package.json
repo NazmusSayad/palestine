@@ -1,6 +1,7 @@
 {
   "scripts": {
-    "sass": "sass ./styles/index.scss ./index.css -w",
+    "sass": "sass ./styles/index.scss ./dist/index.css -w",
+    "sass:build": "sass ./styles/index.scss ./dist/index.css",
     "build": "node ./build/index.js",
     "dev": "nodemon ./build/index.js"
   },

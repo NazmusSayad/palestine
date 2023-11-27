@@ -1,8 +1,18 @@
+globalThis.html = String.raw
+
 const fs = require('fs')
 const path = require('path')
+const generateCard = require('./generateCard')
+const childProcess = require('child_process')
 
-const imagesJSONPath = path.join(__dirname, '../images.json')
+const templatePath = path.join(__dirname, '../template.html')
 const imagesDir = path.join(__dirname, '../images')
 
+const template = fs.readFileSync(templatePath, 'utf8')
 const images = fs.readdirSync(imagesDir).map((img) => `/images/${img}`)
-fs.writeFileSync(imagesJSONPath, JSON.stringify(images), 'utf-8')
+
+const htmlCards = images.map((url) => generateCard({ url })).join('\n')
+const html = template.replace('<!--CARDS-->', htmlCards)
+fs.writeFileSync(path.join(__dirname, '../index.html'), html)
+
+childProcess.execSync('npm run sass:build')

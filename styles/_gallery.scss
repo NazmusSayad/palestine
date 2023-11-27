@@ -32,6 +32,14 @@
       opacity: 0;
     }
   }
+
+  &:nth-child(odd) .card-img-overlay {
+    background-image: url('/overlay/overlay-1.png');
+  }
+
+  &:not(:nth-child(odd)) .card-img-overlay {
+    background-image: url('/overlay/overlay-2.png');
+  }
 }
 
 .card-img {
